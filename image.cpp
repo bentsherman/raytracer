@@ -38,10 +38,10 @@ Image::Image(const char* fname)
 	this->cols = cols;
 	this->rows = rows;
 	this->brightness = brightness;
-	this->image = new pixel_t[rows * cols];
+	this->pixels = new color_t[rows * cols];
 
 	/* read pixels */
-	file.read((char*) this->image, rows * cols * sizeof(pixel_t));
+	file.read((char*) this->pixels, rows * cols * sizeof(color_t));
 	if ( !file ) {
 		throw std::runtime_error("PPM file truncated");
 	}
@@ -54,7 +54,7 @@ Image::Image(const char* fname)
  */
 Image::~Image()
 {
-	delete[] this->image;
+	delete[] this->pixels;
 }
 
 /**
@@ -70,7 +70,7 @@ void Image::write(const char* fname) const
 	     << this->cols << ' '
 	     << this->rows << ' '
 	     << this->brightness << '\n';
-	file.write((char*) this->image, this->rows * this->cols * sizeof(pixel_t));
+	file.write((char*) this->pixels, this->rows * this->cols * sizeof(color_t));
 
 	file.close();
 }

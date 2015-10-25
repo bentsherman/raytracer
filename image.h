@@ -9,11 +9,11 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-typedef struct pixel_t {
+typedef struct color_t {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
-} pixel_t;
+} color_t;
 
 // TODO: consider file formats other than PPM
 class Image {
@@ -21,7 +21,7 @@ private:
 	int cols;
 	int rows;
 	int brightness;
-	pixel_t* image;
+	color_t* pixels;
 
 public:
 	Image(const char* fname);
@@ -30,7 +30,7 @@ public:
 	// TODO: implement array access, double if possible
 
 	void write(const char* fname) const;
-	// Image duotone(pixel_t tint);
+	// Image duotone(const color_t& tint);
 };
 
 #endif

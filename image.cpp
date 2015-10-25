@@ -31,11 +31,67 @@ std::istream& operator>>(std::istream& is, color_t& c)
 }
 
 /**
- * Construct an image from a PPM file.
+ * Construct an empty image.
  *
- * @param fname name of PPM file to read
+ * @param cols        width of image in pixels
+ * @param rows        height of image in pixels
+ * @param brightness  brightness of image
  */
-Image::Image(const char* fname)
+Image::Image(int cols, int rows, int brightness)
+{
+	this->cols = cols;
+	this->rows = rows;
+	this->brightness = brightness;
+	this->pixels = new color_t[rows * cols];
+}
+
+/**
+ * Construct a default image.
+ */
+Image::Image()
+{
+	this->cols = 0;
+	this->rows = 0;
+	this->brightness = 0;
+	this->pixels = 0;
+}
+
+/**
+ * Destruct an image.
+ */
+Image::~Image()
+{
+	delete[] this->pixels;
+}
+
+/**
+ * Get the pixel width of an image.
+ */
+int Image::get_cols() const
+{
+	return this->cols;
+}
+
+/**
+ * Get the pixel height of an image.
+ */
+int Image::get_rows() const
+{
+	return this->rows;
+}
+
+/**
+ * Get the brightness of an image.
+ */
+int Image::get_brightness() const
+{
+	return this->brightness;
+}
+
+/**
+ * Load an image from a PPM file.
+ */
+void Image::load(const char* fname)
 {
 	std::ifstream file(fname, std::ios_base::binary);
 	std::string header;
@@ -60,20 +116,12 @@ Image::Image(const char* fname)
 	this->pixels = new color_t[rows * cols];
 
 	/* read pixels */
-	file.read((char*) this->pixels, rows * cols * sizeof(color_t));
+	file.read((char*) this->pixels, this->rows * this->cols * sizeof(color_t));
 	if ( !file ) {
 		throw std::runtime_error("PPM file truncated");
 	}
 
 	file.close();
-}
-
-/**
- * Destruct an image.
- */
-Image::~Image()
-{
-	delete[] this->pixels;
 }
 
 /**

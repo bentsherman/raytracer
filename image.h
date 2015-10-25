@@ -29,11 +29,16 @@ private:
 	color_t* pixels;
 
 public:
-	Image(const char* fname);
+	Image(int cols, int rows, int brightness);
+	Image();
 	~Image();
 
 	// TODO: implement array access, double if possible
+	int get_cols() const;
+	int get_rows() const;
+	int get_brightness() const;
 
+	void load(const char* fname);
 	void write(const char* fname) const;
 	// Image duotone(const color_t& tint);
 };

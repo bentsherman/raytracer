@@ -1,5 +1,5 @@
 /**
- * @file   image.h
+ * @file   Image.h
  * @author Ben Shealy
  *
  * @section DESCRIPTION

@@ -1,12 +1,12 @@
 /**
- * @file   image.cpp
+ * @file   Image.cpp
  * @author Ben Shealy
  *
  * @section DESCRIPTION
  *
  * Implementation of an image.
  */
-#include "image.h"
+#include "Image.h"
 #include <fstream>
 #include <stdexcept>
 #include <string>

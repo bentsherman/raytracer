@@ -6,7 +6,7 @@
  *
  * Implementation of a vector.
  */
-#include "vector.h"
+#include "Vector.h"
 #include <math.h>
 
 /**

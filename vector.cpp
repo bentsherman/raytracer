@@ -1,5 +1,5 @@
 /**
- * @file   vector.cpp
+ * @file   Vector.cpp
  * @author Ben Shealy
  *
  * @section DESCRIPTION

@@ -1,5 +1,5 @@
 /**
- * @file   vector.h
+ * @file   Vector.h
  * @author Ben Shealy
  *
  * @section DESCRIPTION

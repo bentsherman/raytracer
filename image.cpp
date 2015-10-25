@@ -9,7 +9,7 @@
 #include "image.h"
 #include <fstream>
 #include <stdexcept>
-#include <string.h>
+#include <string>
 
 using namespace std;
 
@@ -21,17 +21,17 @@ using namespace std;
 Image::Image(char* fname)
 {
 	ifstream file(fname, ios_base::binary);
-	char header[3];
+	string header;
+	int cols, rows, brightness;
 
 	/* check for the PPM header */
-	file.getline(header, 2);
-	if ( strcmp(header, "P6") != 0 ) {
+	file >> header;
+	if ( header != "P6" ) {
 		throw runtime_error("PPM file does not start with \"P6\"");
 	}
 
 	/* read image parameters */
 	// TODO: check for comments, missing values
-	int cols, rows, brightness;
 	file >> cols
 	     >> rows
 	     >> brightness;

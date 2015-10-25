@@ -52,7 +52,7 @@ void Window::load(std::ifstream& file)
 			file >> this->ambient;
 		}
 		else {
-			throw std::runtime_error("invalid key \"" + token + "\"");
+			throw std::runtime_error("Invalid key \"" + token + "\"");
 		}
 
 		file >> token;

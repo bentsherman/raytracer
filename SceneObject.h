@@ -4,7 +4,7 @@
  *
  * @section DESCRIPTION
  *
- * Interface definition of a scene object. An scene object is the base class 
+ * Interface definition of a scene object. A scene object is the base class 
  * for every type of object in a scene.
  */
 #ifndef SCENEOBJECT_H

@@ -35,11 +35,7 @@ void SceneObject::load(std::ifstream& file)
 	file >> token;
 	while ( token != ";" ) {
 		if ( token == "color" ) {
-			unsigned char r, g, b;
-
-			// TODO: overload >> for color_t to include other formats
-			file >> r >> g >> b;
-			this->color = (color_t) {r, g, b};
+			file >> this->color;
 		}
 		else if ( token == "diffuse" ) {
 			file >> this->diffuse;
@@ -64,8 +60,7 @@ void SceneObject::dump(std::ofstream& file) const
 {
 	Entity::dump(file);
 
-	// TODO: overload << for color_t
-	file << "Color: " << this->color.r << this->color.g << this->color.b << '\n'
+	file << "Color: " << this->color << '\n'
 	     << "Diffuse intensity: " << this->diffuse << '\n'
 	     << "Reflectivity: " << this->reflective << '\n';
 }

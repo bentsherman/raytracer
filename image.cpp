@@ -12,6 +12,25 @@
 #include <string>
 
 /**
+ * Print a color to an output stream.
+ */
+std::ostream& operator<<(std::ostream& os, const color_t& c)
+{
+	os << c.r << ' ' << c.g << ' ' << c.b;
+	return os;
+}
+
+/**
+ * Read a color from an input stream.
+ */
+std::istream& operator>>(std::istream& is, color_t& c)
+{
+	// TODO: include color name and hexadecimal formats
+	is >> c.r >> c.g >> c.b;
+	return is;
+}
+
+/**
  * Construct an image from a PPM file.
  *
  * @param fname name of PPM file to read

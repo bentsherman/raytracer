@@ -9,11 +9,16 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include <iostream>
+
 typedef struct color_t {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
 } color_t;
+
+std::ostream& operator<<(std::ostream& os, const color_t& c);
+std::istream& operator>>(std::istream& is, color_t& c);
 
 // TODO: consider file formats other than PPM
 class Image {

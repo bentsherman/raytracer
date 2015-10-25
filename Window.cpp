@@ -24,6 +24,30 @@ Window::Window()
 }
 
 /**
+ * Get the width of a window.
+ */
+double Window::get_width() const
+{
+	return this->width;
+}
+
+/**
+ * Get the height of a window.
+ */
+double Window::get_height() const
+{
+	return this->height;
+}
+
+/**
+ * Get the pixel width of a window.
+ */
+int Window::get_cols() const
+{
+	return this->cols;
+}
+
+/**
  * Load a window from a file.
  *
  * @param file

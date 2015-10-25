@@ -36,6 +36,13 @@ void Scene::load(std::ifstream& file)
 
 		if ( token == "window" ) {
 			this->window.load(file);
+
+			this->image = Image(
+				this->window.get_cols(),
+				this->window.get_cols() * this->window.get_height()
+					/ this->window.get_width(),
+				255
+			);
 		}
 		else if ( token == "plane" ) {
 			// ...

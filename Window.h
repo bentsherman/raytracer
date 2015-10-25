@@ -23,6 +23,10 @@ private:
 public:
 	Window();
 
+	double get_width() const;
+	double get_height() const;
+	int get_cols() const;
+
 	void load(std::ifstream&);
 	void dump(std::ofstream&) const;
 };

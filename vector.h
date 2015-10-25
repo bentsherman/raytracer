@@ -9,6 +9,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <iostream>
+
 // TODO: review operator overloading, also for iostream
 class Vector {
 private:
@@ -35,5 +37,8 @@ public:
 	double dot(const Vector& rhs) const;
 	Vector cross(const Vector& rhs) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Vector& v);
+std::istream& operator>>(std::istream& is, Vector& v);
 
 #endif

@@ -24,12 +24,12 @@ private:
 	pixel_t* image;
 
 public:
-	Image(char* fname);
+	Image(const char* fname);
 	~Image();
 
 	// TODO: implement array access, double if possible
 
-	void write(char* fname) const;
+	void write(const char* fname) const;
 	// Image duotone(pixel_t tint);
 };
 

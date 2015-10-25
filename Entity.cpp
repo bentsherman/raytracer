@@ -4,7 +4,7 @@
  *
  * @section DESCRIPTION
  *
- * Interface definition of an entity.
+ * Implementation of an entity.
  */
 #include "Entity.h"
 #include <stdexcept>
@@ -14,7 +14,7 @@
  *
  * @param name
  */
-Entity::Entity(const string& name)
+Entity::Entity(const std::string& name)
 {
 	this->name = name;
 }
@@ -32,13 +32,13 @@ Entity::Entity()
  *
  * @param file
  */
-void Entity::load(ifstream& file)
+void Entity::load(std::ifstream& file)
 {
-	string token;
+	std::string token;
 
 	file >> token;
 	if ( token != "name" ) {
-		throw runtime_error("Invalid attribute \"" + token + "\"");
+		throw std::runtime_error("Invalid key \"" + token + "\"");
 	}
 
 	file >> token;
@@ -50,7 +50,7 @@ void Entity::load(ifstream& file)
  *
  * @param file
  */
-void Entity::dump(ofstream& file)
+void Entity::dump(std::ofstream& file) const
 {
 	file << "Name: " << this->name << '\n';
 }

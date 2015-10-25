@@ -11,23 +11,21 @@
 #include <stdexcept>
 #include <string>
 
-using namespace std;
-
 /**
  * Construct an image from a PPM file.
  *
  * @param fname name of PPM file to read
  */
-Image::Image(char* fname)
+Image::Image(const char* fname)
 {
-	ifstream file(fname, ios_base::binary);
-	string header;
+	std::ifstream file(fname, std::ios_base::binary);
+	std::string header;
 	int cols, rows, brightness;
 
 	/* check for the PPM header */
 	file >> header;
 	if ( header != "P6" ) {
-		throw runtime_error("PPM file does not start with \"P6\"");
+		throw std::runtime_error("PPM file does not start with \"P6\"");
 	}
 
 	/* read image parameters */
@@ -45,7 +43,7 @@ Image::Image(char* fname)
 	/* read pixels */
 	file.read((char*) this->image, rows * cols * sizeof(pixel_t));
 	if ( !file ) {
-		throw runtime_error("PPM file truncated");
+		throw std::runtime_error("PPM file truncated");
 	}
 
 	file.close();
@@ -64,9 +62,9 @@ Image::~Image()
  *
  * @param fname  name of PPM file to write
  */
-void Image::write(char* fname) const
+void Image::write(const char* fname) const
 {
-	ofstream file(fname, ios_base::binary);
+	std::ofstream file(fname, std::ios_base::binary);
 
 	file << "P6 "
 	     << this->cols << ' '

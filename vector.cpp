@@ -164,3 +164,25 @@ Vector Vector::cross(const Vector& rhs) const
 		this->x * rhs.y - this->y * rhs.x
 	);
 }
+
+/**
+ * Print a vector to an output stream.
+ */
+std::ostream& operator<<(std::ostream& os, const Vector& v)
+{
+	os << "(" << v.getX() << ", " << v.getY() << ", " << v.getZ() << ")";
+	return os;
+}
+
+/**
+ * Read a vector from an input stream.
+ */
+std::istream& operator>>(std::istream& is, Vector& v)
+{
+	double x, y, z;
+
+	is >> x >> y >> z;
+	v = Vector(x, y, z);
+
+	return is;
+}

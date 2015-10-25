@@ -13,18 +13,17 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
-
+// TODO: consider replacing load/dump with >> and << for all objects
 class Entity {
 private:
-	string name;
+	std::string name;
 
 public:
-	Entity(const string&);
+	Entity(const std::string&);
 	Entity();
 
-	void load(ifstream&);
-	void dump(ofstream&);
+	void load(std::ifstream&);
+	void dump(std::ofstream&) const;
 };
 
 #endif

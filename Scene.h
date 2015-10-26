@@ -26,7 +26,7 @@ private:
 	std::list<SceneObject*> objects;
 	std::list<PointLight> lights;
 	Window window;
-	Image image;
+	Image image;  // TODO: consider moving image to Window
 
 public:
 	Scene();

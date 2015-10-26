@@ -45,10 +45,16 @@ void Scene::load(std::ifstream& file)
 			);
 		}
 		else if ( token == "plane" ) {
-			// ...
+			Plane plane;
+
+			plane.load(file);
+			this->objects.push_back(plane);
 		}
 		else if ( token == "sphere" ) {
-			// ...
+			Sphere sphere;
+
+			sphere.load(file);
+			this->objects.push_back(sphere);
 		}
 		else if ( token == "pointlight" ) {
 			PointLight light;

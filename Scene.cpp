@@ -7,6 +7,8 @@
  * Implementation of a scene.
  */
 #include "Scene.h"
+#include "Plane.h"
+#include "Sphere.h"
 #include <stdexcept>
 
 /**
@@ -48,13 +50,13 @@ void Scene::load(std::istream& is)
 			Plane plane;
 
 			plane.load(is);
-			this->objects.push_back(plane);
+			this->objects.push_back(&plane);
 		}
 		else if ( token == "sphere" ) {
 			Sphere sphere;
 
 			sphere.load(is);
-			this->objects.push_back(sphere);
+			this->objects.push_back(&sphere);
 		}
 		else if ( token == "pointlight" ) {
 			PointLight light;

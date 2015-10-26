@@ -22,7 +22,7 @@ Plane::Plane()
  *
  * @param is
  */
-void Plane::load(std::ifstream& is)
+void Plane::load(std::istream& is)
 {
 	std::string token;
 	Vector orient1, orient2;
@@ -55,7 +55,7 @@ void Plane::load(std::ifstream& is)
  *
  * @param os
  */
-void Plane::dump(std::ofstream& os) const
+void Plane::dump(std::ostream& os) const
 {
 	SceneObject::dump(os);
 

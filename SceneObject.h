@@ -32,7 +32,7 @@ public:
 	void load(std::istream&);
 	void dump(std::ostream&) const;
 
-	virtual bool hits(const Vector&, const Vector&, hitinfo_t*) = 0;
+	virtual bool hits(const Vector&, const Vector&, hitinfo_t*) const = 0;
 };
 
 #endif

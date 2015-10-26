@@ -10,7 +10,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include <fstream>
+#include <iostream>
 #include <string>
 
 // TODO: consider replacing load/dump with >> and << for all objects
@@ -22,8 +22,8 @@ public:
 	Entity(const std::string&);
 	Entity();
 
-	void load(std::ifstream&);
-	void dump(std::ofstream&) const;
+	void load(std::istream&);
+	void dump(std::ostream&) const;
 };
 
 #endif

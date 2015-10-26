@@ -22,45 +22,45 @@ SceneObject::SceneObject()
 }
 
 /**
- * Load a scene object from a file.
+ * Load a scene object from an input stream.
  *
- * @param file
+ * @param is
  */
-void SceneObject::load(std::ifstream& file)
+void SceneObject::load(std::istream& is)
 {
 	std::string token;
 
-	Entity::load(file);
+	Entity::load(is);
 
-	file >> token;
+	is >> token;
 	while ( token != ";" ) {
 		if ( token == "color" ) {
-			file >> this->color;
+			is >> this->color;
 		}
 		else if ( token == "diffuse" ) {
-			file >> this->diffuse;
+			is >> this->diffuse;
 		}
 		else if ( token == "reflective" ) {
-			file >> this->reflective;
+			is >> this->reflective;
 		}
 		else {
 			throw std::runtime_error("invalid key \"" + token + "\"");
 		}
 
-		file >> token;
+		is >> token;
 	}
 }
 
 /**
- * Dump a scene object to a file.
+ * Dump a scene object to an output stream.
  *
- * @param file
+ * @param os
  */
-void SceneObject::dump(std::ofstream& file) const
+void SceneObject::dump(std::ostream& os) const
 {
-	Entity::dump(file);
+	Entity::dump(os);
 
-	file << "Color: " << this->color << '\n'
-	     << "Diffuse intensity: " << this->diffuse << '\n'
-	     << "Reflectivity: " << this->reflective << '\n';
+	os << "Color: " << this->color << '\n'
+	   << "Diffuse intensity: " << this->diffuse << '\n'
+	   << "Reflectivity: " << this->reflective << '\n';
 }

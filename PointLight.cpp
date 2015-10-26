@@ -46,45 +46,45 @@ double PointLight::get_brightess() const
 }
 
 /**
- * Load a point light from a file.
+ * Load a point light from an input stream.
  *
- * @param file
+ * @param is
  */
-void PointLight::load(std::ifstream& file)
+void PointLight::load(std::istream& is)
 {
 	std::string token;
 
-	Entity::load(file);
+	Entity::load(is);
 
-	file >> token;
+	is >> token;
 	while ( token != ";" ) {
 		if ( token == "center" ) {
-			file >> this->center;
+			is >> this->center;
 		}
 		else if ( token == "color" ) {
-			file >> this->color;
+			is >> this->color;
 		}
 		else if ( token == "brightness" ) {
-			file >> this->brightness;
+			is >> this->brightness;
 		}
 		else {
 			throw std::runtime_error("Invalid key \"" + token + "\"");
 		}
 
-		file >> token;
+		is >> token;
 	}
 }
 
 /**
- * Dump a point light to a file.
+ * Dump a point light to an output stream.
  *
- * @param file
+ * @param os
  */
-void PointLight::dump(std::ofstream& file) const
+void PointLight::dump(std::ostream& os) const
 {
-	Entity::dump(file);
+	Entity::dump(os);
 
-	file << "Center: " << this->center << '\n'
-	     << "Color: " << this->color << '\n'
-	     << "Brightness: " << this->brightness << '\n';
+	os << "Center: " << this->center << '\n'
+	   << "Color: " << this->color << '\n'
+	   << "Brightness: " << this->brightness << '\n';
 }

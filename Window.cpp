@@ -48,51 +48,51 @@ int Window::get_cols() const
 }
 
 /**
- * Load a window from a file.
+ * Load a window from an input stream.
  *
- * @param file
+ * @param is
  */
-void Window::load(std::ifstream& file)
+void Window::load(std::istream& is)
 {
 	std::string token;
 
-	Entity::load(file);
+	Entity::load(is);
 
-	file >> token;
+	is >> token;
 	while ( token != ";" ) {
 		if ( token == "width" ) {
-			file >> this->width;
+			is >> this->width;
 		}
 		else if ( token == "height" ) {
-			file >> this->height;
+			is >> this->height;
 		}
 		else if ( token == "columns" ) {
-			file >> this->cols;
+			is >> this->cols;
 		}
 		else if ( token == "viewpoint" ) {
-			file >> this->viewPoint;
+			is >> this->viewPoint;
 		}
 		else if ( token == "ambient" ) {
-			file >> this->ambient;
+			is >> this->ambient;
 		}
 		else {
 			throw std::runtime_error("Invalid key \"" + token + "\"");
 		}
 
-		file >> token;
+		is >> token;
 	}
 }
 
 /**
- * Dump a window to a file.
+ * Dump a window to an output stream.
  *
- * @param file
+ * @param os
  */
-void Window::dump(std::ofstream& file) const
+void Window::dump(std::ostream& os) const
 {
-	Entity::dump(file);
+	Entity::dump(os);
 
-	file << "Window Width: " << this->width << '\n'
+	os << "Window Width: " << this->width << '\n'
 	     << "Window Height: " << this->height << '\n'
 	     << "Pixel Width: " << this->cols << '\n'
 	     << "Viewpoint: " << this->viewPoint << '\n'

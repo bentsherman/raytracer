@@ -29,8 +29,8 @@ private:
 public:
 	SceneObject();
 
-	void load(std::ifstream&);
-	void dump(std::ofstream&) const;
+	void load(std::istream&);
+	void dump(std::ostream&) const;
 
 	virtual bool hits(const Vector&, const Vector&, hitinfo_t*) = 0;
 };

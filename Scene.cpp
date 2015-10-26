@@ -21,21 +21,21 @@ Scene::Scene()
 }
 
 /**
- * Load a scane from a file.
+ * Load a scane from an input stream.
  *
- * @param file
+ * @param is
  */
-void Scene::load(std::ifstream& file)
+void Scene::load(std::istream& is)
 {
 	std::string token;
 
-	Entity::load(file);
+	Entity::load(is);
 
-	while ( file ) {
-		file >> token;
+	while ( is ) {
+		is >> token;
 
 		if ( token == "window" ) {
-			this->window.load(file);
+			this->window.load(is);
 
 			this->image = Image(
 				this->window.get_cols(),
@@ -47,19 +47,19 @@ void Scene::load(std::ifstream& file)
 		else if ( token == "plane" ) {
 			Plane plane;
 
-			plane.load(file);
+			plane.load(is);
 			this->objects.push_back(plane);
 		}
 		else if ( token == "sphere" ) {
 			Sphere sphere;
 
-			sphere.load(file);
+			sphere.load(is);
 			this->objects.push_back(sphere);
 		}
 		else if ( token == "pointlight" ) {
 			PointLight light;
 
-			light.load(file);
+			light.load(is);
 			this->lights.push_back(light);
 		}
 		else {
@@ -69,27 +69,27 @@ void Scene::load(std::ifstream& file)
 }
 
 /**
- * Dump a scane to a file.
+ * Dump a scane to an output stream.
  *
- * @param file
+ * @param os
  */
-void Scene::dump(std::ofstream& file) const
+void Scene::dump(std::ostream& os) const
 {
-	Entity::dump(file);
+	Entity::dump(os);
 
 	// TODO: move pixel height to Window class ?
-	this->window.dump(file);
-	file << "Pixel Height: " << this->image.get_rows() << '\n';
+	this->window.dump(os);
+	os << "Pixel Height: " << this->image.get_rows() << '\n';
 
-	file << "Scene Objects:\n";
+	os << "Scene Objects:\n";
 	for ( std::list<SceneObject*>::const_iterator iter = this->objects.begin();
 			iter != this->objects.end(); iter++ ) {
-		(*iter)->dump(file);
+		(*iter)->dump(os);
 	}
 
-	file << "Point Lights:\n";
+	os << "Point Lights:\n";
 	for ( std::list<PointLight>::const_iterator iter = this->lights.begin();
 			iter != this->lights.end(); iter++ ) {
-		iter->dump(file);
+		iter->dump(os);
 	}
 }

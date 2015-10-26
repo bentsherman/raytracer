@@ -19,43 +19,43 @@ Sphere::Sphere()
 }
 
 /**
- * Load a sphere from a file.
+ * Load a sphere from an input stream.
  *
- * @param file
+ * @param is
  */
-void Sphere::load(std::ifstream& file)
+void Sphere::load(std::istream& is)
 {
 	std::string token;
 
-	SceneObject::load(file);
+	SceneObject::load(is);
 
-	file >> token;
+	is >> token;
 	while ( token != ";" ) {
 		if ( token == "center" ) {
-			file >> this->center;
+			is >> this->center;
 		}
 		else if ( token == "radius" ) {
-			file >> this->radius;
+			is >> this->radius;
 		}
 		else {
 			throw std::runtime_error("Invalid key \"" + token + "\"");
 		}
 
-		file >> token;
+		is >> token;
 	}
 }
 
 /**
- * Dump a sphere to a file.
+ * Dump a sphere to an output stream.
  *
- * @param file
+ * @param os
  */
-void Sphere::dump(std::ofstream& file) const
+void Sphere::dump(std::ostream& os) const
 {
-	SceneObject::dump(file);
+	SceneObject::dump(os);
 
-	file << "Center: " << this->center << '\n'
-	     << "Radius: " << this->radius << '\n';
+	os << "Center: " << this->center << '\n'
+	   << "Radius: " << this->radius << '\n';
 }
 
 /**

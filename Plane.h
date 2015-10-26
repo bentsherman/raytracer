@@ -21,8 +21,8 @@ private:
 public:
 	Plane();
 
-	void load(std::ifstream&);
-	void dump(std::ofstream&) const;
+	void load(std::istream&);
+	void dump(std::ostream&) const;
 
 	bool hits(const Vector&, const Vector&, hitinfo_t*) const;
 };

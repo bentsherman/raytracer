@@ -31,8 +31,8 @@ private:
 public:
 	Scene();
 
-	void load(std::ifstream&);
-	void dump(std::ofstream&) const;
+	void load(std::istream&);
+	void dump(std::ostream&) const;
 };
 
 #endif

@@ -29,8 +29,8 @@ public:
 	double get_brightess() const;
 	// Vector process_light(const Scene&, const SceneObject&, hitinfo_t*) const;
 
-	void load(std::ifstream&);
-	void dump(std::ofstream&) const;
+	void load(std::istream&);
+	void dump(std::ostream&) const;
 };
 
 #endif

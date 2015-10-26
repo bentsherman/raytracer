@@ -28,29 +28,29 @@ Entity::Entity()
 }
 
 /**
- * Load an entity from a file.
+ * Load an entity from an input stream.
  *
- * @param file
+ * @param is
  */
-void Entity::load(std::ifstream& file)
+void Entity::load(std::istream& is)
 {
 	std::string token;
 
-	file >> token;
+	is >> token;
 	if ( token != "name" ) {
 		throw std::runtime_error("Invalid key \"" + token + "\"");
 	}
 
-	file >> token;
+	is >> token;
 	this->name = token;
 }
 
 /**
- * Dump an entity to a file.
+ * Dump an entity to an output stream.
  *
- * @param file
+ * @param os
  */
-void Entity::dump(std::ofstream& file) const
+void Entity::dump(std::ostream& os) const
 {
-	file << "Name: " << this->name << '\n';
+	os << "Name: " << this->name << '\n';
 }

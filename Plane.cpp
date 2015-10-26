@@ -18,49 +18,49 @@ Plane::Plane()
 }
 
 /**
- * Load a plane from a file.
+ * Load a plane from an input stream.
  *
- * @param file
+ * @param is
  */
-void Plane::load(std::ifstream& file)
+void Plane::load(std::ifstream& is)
 {
 	std::string token;
 	Vector orient1, orient2;
 
-	SceneObject::load(file);
+	SceneObject::load(is);
 
-	file >> token;
+	is >> token;
 	while ( token != ";" ) {
 		if ( token == "point" ) {
-			file >> this->point;
+			is >> this->point;
 		}
 		else if ( token == "orient1" ) {
-			file >> orient1;
+			is >> orient1;
 		}
 		else if ( token == "orient2" ) {
-			file >> orient2;
+			is >> orient2;
 		}
 		else {
 			throw std::runtime_error("Invalid key \"" + token + "\"");
 		}
 
-		file >> token;
+		is >> token;
 	}
 
 	this->normal = orient1.cross(orient2).unit();
 }
 
 /**
- * Dump a plane to a file.
+ * Dump a plane to an output stream.
  *
- * @param file
+ * @param os
  */
-void Plane::dump(std::ofstream& file) const
+void Plane::dump(std::ofstream& os) const
 {
-	SceneObject::dump(file);
+	SceneObject::dump(os);
 
-	file << "Point: " << this->point << '\n'
-	     << "Normal: " << this->normal << '\n';
+	os << "Point: " << this->point << '\n'
+	   << "Normal: " << this->normal << '\n';
 }
 
 /**

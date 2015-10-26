@@ -10,23 +10,19 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "Entity.h"
 #include "Window.h"
 #include "Image.h"
 #include "SceneObject.h"
 #include "PointLight.h"
+#include <iostream>
 #include <list>
 
-class Scene : public Entity {
+class Scene {
 private:
-	/**
-	 * For variables that could be any subclass of an abstract class, we must
-	 * use a pointer of the abstract class.
-	 */
-	std::list<SceneObject*> objects;
-	std::list<PointLight> lights;
 	Window window;
 	Image image;  // TODO: consider moving image to Window
+	std::list<SceneObject*> objects;
+	std::list<PointLight> lights;
 
 public:
 	Scene();

@@ -76,7 +76,7 @@ void Window::load(std::istream& is)
 			is >> this->ambient;
 		}
 		else {
-			throw std::runtime_error("Invalid key \"" + token + "\"");
+			throw std::runtime_error("invalid key \"" + token + "\"");
 		}
 
 		is >> token;

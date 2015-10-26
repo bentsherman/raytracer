@@ -16,8 +16,6 @@
  */
 Scene::Scene()
 {
-	Entity();
-
 	// ...
 	this->image = Image(0, 0, 0);
 }
@@ -30,8 +28,6 @@ Scene::Scene()
 void Scene::load(std::istream& is)
 {
 	std::string token;
-
-	Entity::load(is);
 
 	while ( is ) {
 		is >> token;
@@ -47,16 +43,16 @@ void Scene::load(std::istream& is)
 			);
 		}
 		else if ( token == "plane" ) {
-			Plane plane;
+			Plane* plane = new Plane;
 
-			plane.load(is);
-			this->objects.push_back(&plane);
+			plane->load(is);
+			this->objects.push_back(plane);
 		}
 		else if ( token == "sphere" ) {
-			Sphere sphere;
+			Sphere* sphere = new Sphere;
 
-			sphere.load(is);
-			this->objects.push_back(&sphere);
+			sphere->load(is);
+			this->objects.push_back(sphere);
 		}
 		else if ( token == "pointlight" ) {
 			PointLight light;
@@ -65,7 +61,7 @@ void Scene::load(std::istream& is)
 			this->lights.push_back(light);
 		}
 		else {
-			throw std::runtime_error("Unknown token \"" + token + "\"");
+			throw std::runtime_error("unknown token \"" + token + "\"");
 		}
 	}
 }
@@ -77,8 +73,6 @@ void Scene::load(std::istream& is)
  */
 void Scene::dump(std::ostream& os) const
 {
-	Entity::dump(os);
-
 	// TODO: move pixel height to Window class ?
 	this->window.dump(os);
 	os << "Pixel Height: " << this->image.get_rows() << '\n';

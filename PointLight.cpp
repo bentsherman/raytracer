@@ -68,7 +68,7 @@ void PointLight::load(std::istream& is)
 			is >> this->brightness;
 		}
 		else {
-			throw std::runtime_error("Invalid key \"" + token + "\"");
+			throw std::runtime_error("invalid key \"" + token + "\"");
 		}
 
 		is >> token;

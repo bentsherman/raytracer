@@ -38,7 +38,7 @@ void Entity::load(std::istream& is)
 
 	is >> token;
 	if ( token != "name" ) {
-		throw std::runtime_error("Invalid key \"" + token + "\"");
+		throw std::runtime_error("invalid key \"" + token + "\"");
 	}
 
 	is >> token;

@@ -41,7 +41,7 @@ void Plane::load(std::istream& is)
 			is >> orient2;
 		}
 		else {
-			throw std::runtime_error("Invalid key \"" + token + "\"");
+			throw std::runtime_error("invalid key \"" + token + "\"");
 		}
 
 		is >> token;

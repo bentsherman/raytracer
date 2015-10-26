@@ -66,15 +66,16 @@ void Plane::dump(std::ofstream& file) const
 /**
  * Get whether a ray hits the plane.
  *
- *  Using the following relation,
- *    t = (N dot (P - V))/(N dot D),
+ * Using the following relation,
+ *   t = (N dot (P - V))/(N dot D),
  * 
- *  a hit occurs if
- *    N dot D != 0 AND t > 0 AND H_z = (V + t*D)_z <= 0
+ * a hit occurs if
+ *   N dot D != 0 AND t > 0 AND H_z = (V + t*D)_z <= 0
  *
  * @param V    origin of the ray
  * @param D    direction of the ray
  * @param hit  hit paramters
+ * @return true if a hit occures, false otherwise
  */
 bool Plane::hits(const Vector& V, const Vector& D, hitinfo_t* hit) const
 {
@@ -93,6 +94,7 @@ bool Plane::hits(const Vector& V, const Vector& D, hitinfo_t* hit) const
 				hit->point = H;
 				hit->normal = N;
 				hit->distance = t;
+
 				return true;
 			}
 		}

@@ -1,0 +1,50 @@
+window  name view1 
+   width 10
+   height 10
+   columns 500
+   viewpoint 0 0 5
+   ambient 6 6 6 ;
+
+plane  name left
+   color blue ;
+   point -10 0 0
+   orient1 0 1 0
+   orient2 0 0 1 ;
+
+plane  name top
+   color red ;
+   point 0 12 0
+   orient1 1 0 0
+   orient2 0 0 1 ;
+
+plane  name right
+   color yellow ;
+   point 14 0 0
+   orient1 0 -1 0
+   orient2 0 0 1 ;
+
+plane  name bottom
+   color green ;
+   point 0 -16 0
+   orient1 -1 0 0
+   orient2 0 0 1 ;
+
+sphere  name ball1
+   color white ;
+   center -3 3 -2
+   radius 2 ;
+
+sphere  name ball2
+   color black ;
+   center 3 3 -4
+   radius 2 ;
+
+sphere  name ball3
+   color orange ;
+   center 3 -3 -6
+   radius 2 ;
+
+sphere  name ball4
+   color purple ;
+   center -3 -3 -8
+   radius 2 ;

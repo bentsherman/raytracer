@@ -7,6 +7,7 @@
  * Implementation of an image.
  */
 #include "Image.h"
+#include <algorithm>
 #include <fstream>
 #include <stdexcept>
 #include <string>
@@ -25,8 +26,15 @@ std::ostream& operator<<(std::ostream& os, const color_t& c)
  */
 std::istream& operator>>(std::istream& is, color_t& c)
 {
-	// TODO: include color name and hexadecimal formats
-	is >> c.r >> c.g >> c.b;
+	unsigned short r, g, b;
+
+	is >> r >> g >> b;
+	c = (color_t) {
+		(unsigned char) r,
+		(unsigned char) g,
+		(unsigned char) b
+	};
+
 	return is;
 }
 
@@ -62,6 +70,24 @@ Image::Image()
 Image::~Image()
 {
 	delete[] this->pixels;
+}
+
+void swap(Image& lhs, Image& rhs)
+{
+	std::swap(lhs.cols, rhs.cols);
+	std::swap(lhs.rows, rhs.rows);
+	std::swap(lhs.brightness, rhs.brightness);
+	std::swap(lhs.pixels, rhs.pixels);
+}
+
+/**
+ * Assignment operator implemented with the "copy-and-swap" pattern.
+ */
+Image& Image::operator=(Image& rhs)
+{
+	swap(*this, rhs);
+
+	return *this;
 }
 
 /**

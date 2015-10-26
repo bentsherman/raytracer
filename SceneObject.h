@@ -28,6 +28,7 @@ private:
 
 public:
 	SceneObject();
+	virtual ~SceneObject();
 
 	void load(std::istream&);
 	void dump(std::ostream&) const;

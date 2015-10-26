@@ -17,7 +17,17 @@
 Scene::Scene()
 {
 	// ...
-	this->image = Image(0, 0, 0);
+}
+
+/**
+ * Destruct a scene.
+ */
+Scene::~Scene()
+{
+	for ( std::list<SceneObject*>::iterator iter = this->objects.begin();
+			iter != this->objects.end(); iter++ ) {
+		delete *iter;
+	}
 }
 
 /**
@@ -29,18 +39,17 @@ void Scene::load(std::istream& is)
 {
 	std::string token;
 
-	while ( is ) {
-		is >> token;
-
+	while ( is >> token ) {
 		if ( token == "window" ) {
 			this->window.load(is);
 
-			this->image = Image(
+			Image image(
 				this->window.get_cols(),
 				this->window.get_cols() * this->window.get_height()
 					/ this->window.get_width(),
 				255
 			);
+			this->image = image;
 		}
 		else if ( token == "plane" ) {
 			Plane* plane = new Plane;

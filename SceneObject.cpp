@@ -22,6 +22,14 @@ SceneObject::SceneObject()
 }
 
 /**
+ * Destruct a scene object.
+ */
+SceneObject::~SceneObject()
+{
+
+}
+
+/**
  * Load a scene object from an input stream.
  *
  * @param is

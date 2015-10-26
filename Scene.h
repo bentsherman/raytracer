@@ -26,6 +26,7 @@ private:
 
 public:
 	Scene();
+	~Scene();
 
 	void load(std::istream&);
 	void dump(std::ostream&) const;

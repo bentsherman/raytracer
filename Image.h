@@ -31,7 +31,11 @@ private:
 public:
 	Image(int cols, int rows, int brightness);
 	Image();
+	// Image(const Image& other);
 	~Image();
+
+	friend void swap(Image& lhs, Image& rhs);
+	Image& operator=(Image& rhs);
 
 	// TODO: implement array access, double if possible
 	int get_cols() const;

@@ -28,6 +28,14 @@ Entity::Entity()
 }
 
 /**
+ * Destruct an entity.
+ */
+Entity::~Entity()
+{
+
+}
+
+/**
  * Load an entity from an input stream.
  *
  * @param is

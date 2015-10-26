@@ -21,6 +21,7 @@ private:
 public:
 	Entity(const std::string&);
 	Entity();
+	virtual ~Entity();
 
 	void load(std::istream&);
 	void dump(std::ostream&) const;

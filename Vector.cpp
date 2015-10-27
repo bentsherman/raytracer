@@ -113,7 +113,7 @@ Vector Vector::operator-(const Vector& rhs) const
  * @param c  scalar
  * @return   product of this vector and c
  */
-Vector Vector::operator*(double c) const
+Vector Vector::operator*(const double& c) const
 {
 	return Vector(c * this->x, c * this->y, c * this->z);
 }
@@ -124,7 +124,7 @@ Vector Vector::operator*(double c) const
  * @param c  scalar
  * @return   quotient of this vector and c
  */
-Vector Vector::operator/(double c) const
+Vector Vector::operator/(const double& c) const
 {
 	return (*this) * (1.0 / c);
 }

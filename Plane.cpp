@@ -10,15 +10,7 @@
 #include <stdexcept>
 
 /**
- * Construct a default plane.
- */
-Plane::Plane()
-{
-	// ...
-}
-
-/**
- * Load a plane from an input stream.
+ * Read a plane from an input stream.
  *
  * @param is
  */
@@ -51,7 +43,7 @@ void Plane::load(std::istream& is)
 }
 
 /**
- * Dump a plane to an output stream.
+ * Write a plane to an output stream.
  *
  * @param os
  */

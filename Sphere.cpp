@@ -11,15 +11,7 @@
 #include <stdexcept>
 
 /**
- * Construct a default sphere.
- */
-Sphere::Sphere()
-{
-	// ...
-}
-
-/**
- * Load a sphere from an input stream.
+ * Read a sphere from an input stream.
  *
  * @param is
  */
@@ -46,7 +38,7 @@ void Sphere::load(std::istream& is)
 }
 
 /**
- * Dump a sphere to an output stream.
+ * Write a sphere to an output stream.
  *
  * @param os
  */

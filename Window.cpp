@@ -48,32 +48,51 @@ int Window::get_cols() const
 }
 
 /**
- * Load a window from an input stream.
+ * Write a window to an output stream.
+ *
+ * @param os
+ */
+std::ostream& operator<<(std::ostream& os, const Window& window)
+{
+	os << "window" << '\n'
+	   << (Entity) window
+	   << "  width: " << window.width << '\n'
+	   << "  height: " << window.height << '\n'
+	   << "  columns: " << window.cols << '\n'
+	   << "  rows: " << (int)(window.cols * window.height / window.width) << '\n'
+	   << "  viewpoint: " << window.viewPoint << '\n'
+	   << "  ambient: " << window.ambient << '\n';
+
+	return os;
+}
+
+/**
+ * Read a window from an input stream.
  *
  * @param is
  */
-void Window::load(std::istream& is)
+std::istream& operator>>(std::istream& is, Window& window)
 {
 	std::string token;
 
-	Entity::load(is);
+	is >> (Entity&) window;
 
 	is >> token;
 	while ( token != ";" ) {
 		if ( token == "width" ) {
-			is >> this->width;
+			is >> window.width;
 		}
 		else if ( token == "height" ) {
-			is >> this->height;
+			is >> window.height;
 		}
 		else if ( token == "columns" ) {
-			is >> this->cols;
+			is >> window.cols;
 		}
 		else if ( token == "viewpoint" ) {
-			is >> this->viewPoint;
+			is >> window.viewPoint;
 		}
 		else if ( token == "ambient" ) {
-			is >> this->ambient;
+			is >> window.ambient;
 		}
 		else {
 			throw std::runtime_error("invalid key \"" + token + "\"");
@@ -81,23 +100,6 @@ void Window::load(std::istream& is)
 
 		is >> token;
 	}
-}
 
-/**
- * Dump a window to an output stream.
- *
- * @param os
- */
-void Window::dump(std::ostream& os) const
-{
-	os << "window" << '\n';
-
-	Entity::dump(os);
-
-	os << "  width: " << this->width << '\n'
-	   << "  height: " << this->height << '\n'
-	   << "  columns: " << this->cols << '\n'
-	   << "  rows: " << (int)(this->cols * this->height / this->width) << '\n'
-	   << "  viewpoint: " << this->viewPoint << '\n'
-	   << "  ambient: " << this->ambient << '\n';
+	return is;
 }

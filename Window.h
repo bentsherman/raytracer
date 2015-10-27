@@ -27,8 +27,8 @@ public:
 	double get_height() const;
 	int get_cols() const;
 
-	void load(std::istream&);
-	void dump(std::ostream&) const;
+	friend std::ostream& operator<<(std::ostream&, const Window&);
+	friend std::istream& operator>>(std::istream&, Window&);
 };
 
 #endif

@@ -21,8 +21,8 @@ int main(int argc, char** argv)
 		/* load and dump scene */
 		Scene scene;
 
-		scene.load(in);
-		scene.dump(std::clog);
+		in >> scene;
+		std::clog << scene;
 		
 		/* render the scene */
 		// scene.render();

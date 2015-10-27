@@ -19,8 +19,6 @@ private:
 	Vector normal;
 
 public:
-	Plane();
-
 	void load(std::istream&);
 	void dump(std::ostream&) const;
 

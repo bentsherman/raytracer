@@ -13,18 +13,15 @@
 #include <iostream>
 #include <string>
 
-// TODO: consider replacing load/dump with >> and << for all objects
 class Entity {
 private:
 	std::string name;
 
 public:
-	Entity(const std::string&);
-	Entity();
 	virtual ~Entity();
 
-	virtual void load(std::istream&);
-	virtual void dump(std::ostream&) const;
+	friend std::ostream& operator<<(std::ostream&, const Entity&);
+	friend std::istream& operator>>(std::istream&, Entity&);
 };
 
 #endif

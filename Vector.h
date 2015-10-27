@@ -30,15 +30,15 @@ public:
 
 	Vector operator+(const Vector& rhs) const;
 	Vector operator-(const Vector& rhs) const;
-	Vector operator*(double c) const;
-	Vector operator/(double c) const;
+	Vector operator*(const double& c) const;
+	Vector operator/(const double& c) const;
 
 	Vector unit() const;
 	double dot(const Vector& rhs) const;
 	Vector cross(const Vector& rhs) const;
 };
 
-std::ostream& operator<<(std::ostream& os, const Vector& v);
-std::istream& operator>>(std::istream& is, Vector& v);
+std::ostream& operator<<(std::ostream&, const Vector&);
+std::istream& operator>>(std::istream&, Vector&);
 
 #endif

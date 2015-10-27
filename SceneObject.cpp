@@ -30,7 +30,20 @@ SceneObject::~SceneObject()
 }
 
 /**
- * Load a scene object from an input stream.
+ * Write a scene object to an output stream.
+ *
+ * @param os
+ */
+void SceneObject::dump(std::ostream& os) const
+{
+	os << (Entity&) *this
+	   << "  color: " << this->color << '\n'
+	   << "  diffuse: " << this->diffuse << '\n'
+	   << "  reflective: " << this->reflective << '\n';
+}
+
+/**
+ * Read a scene object from an input stream.
  *
  * @param is
  */
@@ -38,7 +51,7 @@ void SceneObject::load(std::istream& is)
 {
 	std::string token;
 
-	Entity::load(is);
+	is >> (Entity&) *this;
 
 	is >> token;
 	while ( token != ";" ) {
@@ -59,16 +72,16 @@ void SceneObject::load(std::istream& is)
 	}
 }
 
-/**
- * Dump a scene object to an output stream.
- *
- * @param os
- */
-void SceneObject::dump(std::ostream& os) const
+std::ostream& operator<<(std::ostream& os, const SceneObject& object)
 {
-	Entity::dump(os);
+	object.dump(os);
 
-	os << "  color: " << this->color << '\n'
-	   << "  diffuse: " << this->diffuse << '\n'
-	   << "  reflective: " << this->reflective << '\n';
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, SceneObject& object)
+{
+	object.load(is);
+
+	return is;
 }

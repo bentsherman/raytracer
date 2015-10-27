@@ -34,6 +34,9 @@ public:
 	virtual void dump(std::ostream&) const;
 
 	virtual bool hits(const Vector&, const Vector&, hitinfo_t*) const = 0;
+
+	friend std::ostream& operator<<(std::ostream&, const SceneObject&);
+	friend std::istream& operator>>(std::istream&, SceneObject&);
 };
 
 #endif

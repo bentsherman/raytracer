@@ -25,11 +25,10 @@ private:
 	std::list<PointLight> lights;
 
 public:
-	Scene();
 	~Scene();
 
-	void load(std::istream&);
-	void dump(std::ostream&) const;
+	friend std::ostream& operator<<(std::ostream&, const Scene&);
+	friend std::istream& operator>>(std::istream&, Scene&);
 };
 
 #endif

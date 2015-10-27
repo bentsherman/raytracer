@@ -10,24 +10,6 @@
 #include <stdexcept>
 
 /**
- * Construct an entity.
- *
- * @param name
- */
-Entity::Entity(const std::string& name)
-{
-	this->name = name;
-}
-
-/**
- * Construct a default entity.
- */
-Entity::Entity()
-{
-
-}
-
-/**
  * Destruct an entity.
  */
 Entity::~Entity()
@@ -36,18 +18,30 @@ Entity::~Entity()
 }
 
 /**
- * Load an entity from an input stream.
+ * Write an entity to an output stream.
+ *
+ * @param os
+ */
+std::ostream& operator<<(std::ostream& os, const Entity& entity)
+{
+	os << "  name: " << entity.name << '\n';
+
+	return os;
+}
+
+/**
+ * Read an entity from an input stream.
  *
  * @param is
  */
-void Entity::load(std::istream& is)
+std::istream& operator>>(std::istream& is, Entity& entity)
 {
 	std::string token;
 
 	is >> token;
 	while ( token != ";" ) {
 		if ( token == "name" ) {
-			is >> this->name;
+			is >> entity.name;
 		}
 		else {
 			throw std::runtime_error("invalid key \"" + token + "\"");
@@ -55,14 +49,6 @@ void Entity::load(std::istream& is)
 
 		is >> token;
 	}
-}
 
-/**
- * Dump an entity to an output stream.
- *
- * @param os
- */
-void Entity::dump(std::ostream& os) const
-{
-	os << "  name: " << this->name << '\n';
+	return is;
 }

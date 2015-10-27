@@ -17,8 +17,6 @@ private:
 	double radius;
 
 public:
-	Sphere();
-
 	void load(std::istream&);
 	void dump(std::ostream&) const;
 

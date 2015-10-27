@@ -46,26 +46,42 @@ double PointLight::get_brightess() const
 }
 
 /**
- * Load a point light from an input stream.
+ * Write a point light to an output stream.
+ *
+ * @param os
+ */
+std::ostream& operator<<(std::ostream& os, const PointLight& light)
+{
+	os << "pointlight" << '\n'
+	   << (Entity) light
+	   << "  center: " << light.center << '\n'
+	   << "  color: " << light.color << '\n'
+	   << "  brightness: " << light.brightness << '\n';
+
+	return os;
+}
+
+/**
+ * Read a point light from an input stream.
  *
  * @param is
  */
-void PointLight::load(std::istream& is)
+std::istream& operator>>(std::istream& is, PointLight& light)
 {
 	std::string token;
 
-	Entity::load(is);
+	is >> (Entity&) light;
 
 	is >> token;
 	while ( token != ";" ) {
 		if ( token == "center" ) {
-			is >> this->center;
+			is >> light.center;
 		}
 		else if ( token == "color" ) {
-			is >> this->color;
+			is >> light.color;
 		}
 		else if ( token == "brightness" ) {
-			is >> this->brightness;
+			is >> light.brightness;
 		}
 		else {
 			throw std::runtime_error("invalid key \"" + token + "\"");
@@ -73,20 +89,6 @@ void PointLight::load(std::istream& is)
 
 		is >> token;
 	}
-}
 
-/**
- * Dump a point light to an output stream.
- *
- * @param os
- */
-void PointLight::dump(std::ostream& os) const
-{
-	os << "pointlight" << '\n';
-
-	Entity::dump(os);
-
-	os << "  center: " << this->center << '\n'
-	   << "  color: " << this->color << '\n'
-	   << "  brightness: " << this->brightness << '\n';
+	return is;
 }

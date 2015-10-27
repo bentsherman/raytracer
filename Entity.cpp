@@ -45,12 +45,16 @@ void Entity::load(std::istream& is)
 	std::string token;
 
 	is >> token;
-	if ( token != "name" ) {
-		throw std::runtime_error("invalid key \"" + token + "\"");
-	}
+	while ( token != ";" ) {
+		if ( token == "name" ) {
+			is >> this->name;
+		}
+		else {
+			throw std::runtime_error("invalid key \"" + token + "\"");
+		}
 
-	is >> token;
-	this->name = token;
+		is >> token;
+	}
 }
 
 /**
@@ -60,5 +64,5 @@ void Entity::load(std::istream& is)
  */
 void Entity::dump(std::ostream& os) const
 {
-	os << "Name: " << this->name << '\n';
+	os << "  name: " << this->name << '\n';
 }

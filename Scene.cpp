@@ -82,19 +82,18 @@ void Scene::load(std::istream& is)
  */
 void Scene::dump(std::ostream& os) const
 {
-	// TODO: move pixel height to Window class ?
 	this->window.dump(os);
-	os << "Pixel Height: " << this->image.get_rows() << '\n';
+	os << '\n';
 
-	os << "Scene Objects:\n";
 	for ( std::list<SceneObject*>::const_iterator iter = this->objects.begin();
 			iter != this->objects.end(); iter++ ) {
 		(*iter)->dump(os);
+		os << '\n';
 	}
 
-	os << "Point Lights:\n";
 	for ( std::list<PointLight>::const_iterator iter = this->lights.begin();
 			iter != this->lights.end(); iter++ ) {
 		iter->dump(os);
+		os << '\n';
 	}
 }

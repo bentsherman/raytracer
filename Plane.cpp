@@ -57,10 +57,12 @@ void Plane::load(std::istream& is)
  */
 void Plane::dump(std::ostream& os) const
 {
+	os << "plane" << '\n';
+
 	SceneObject::dump(os);
 
-	os << "Point: " << this->point << '\n'
-	   << "Normal: " << this->normal << '\n';
+	os << "  point: " << this->point << '\n'
+	   << "  normal: " << this->normal << '\n';
 }
 
 /**

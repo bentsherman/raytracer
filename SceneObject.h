@@ -30,8 +30,8 @@ public:
 	SceneObject();
 	virtual ~SceneObject();
 
-	void load(std::istream&);
-	void dump(std::ostream&) const;
+	virtual void load(std::istream&);
+	virtual void dump(std::ostream&) const;
 
 	virtual bool hits(const Vector&, const Vector&, hitinfo_t*) const = 0;
 };

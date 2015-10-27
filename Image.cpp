@@ -17,7 +17,7 @@
  */
 std::ostream& operator<<(std::ostream& os, const color_t& c)
 {
-	os << c.r << ' ' << c.g << ' ' << c.b;
+	os << (unsigned) c.r << ' ' << (unsigned) c.g << ' ' << (unsigned) c.b;
 	return os;
 }
 
@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream& os, const color_t& c)
  */
 std::istream& operator>>(std::istream& is, color_t& c)
 {
-	unsigned short r, g, b;
+	unsigned int r, g, b;
 
 	is >> r >> g >> b;
 	c = (color_t) {

@@ -52,10 +52,12 @@ void Sphere::load(std::istream& is)
  */
 void Sphere::dump(std::ostream& os) const
 {
+	os << "sphere" << '\n';
+
 	SceneObject::dump(os);
 
-	os << "Center: " << this->center << '\n'
-	   << "Radius: " << this->radius << '\n';
+	os << "  center: " << this->center << '\n'
+	   << "  radius: " << this->radius << '\n';
 }
 
 /**

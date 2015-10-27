@@ -68,7 +68,7 @@ void SceneObject::dump(std::ostream& os) const
 {
 	Entity::dump(os);
 
-	os << "Color: " << this->color << '\n'
-	   << "Diffuse intensity: " << this->diffuse << '\n'
-	   << "Reflectivity: " << this->reflective << '\n';
+	os << "  color: " << this->color << '\n'
+	   << "  diffuse: " << this->diffuse << '\n'
+	   << "  reflective: " << this->reflective << '\n';
 }

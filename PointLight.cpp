@@ -82,9 +82,11 @@ void PointLight::load(std::istream& is)
  */
 void PointLight::dump(std::ostream& os) const
 {
+	os << "pointlight" << '\n';
+
 	Entity::dump(os);
 
-	os << "Center: " << this->center << '\n'
-	   << "Color: " << this->color << '\n'
-	   << "Brightness: " << this->brightness << '\n';
+	os << "  center: " << this->center << '\n'
+	   << "  color: " << this->color << '\n'
+	   << "  brightness: " << this->brightness << '\n';
 }

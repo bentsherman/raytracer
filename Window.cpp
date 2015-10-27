@@ -90,11 +90,14 @@ void Window::load(std::istream& is)
  */
 void Window::dump(std::ostream& os) const
 {
+	os << "window" << '\n';
+
 	Entity::dump(os);
 
-	os << "Window Width: " << this->width << '\n'
-	     << "Window Height: " << this->height << '\n'
-	     << "Pixel Width: " << this->cols << '\n'
-	     << "Viewpoint: " << this->viewPoint << '\n'
-	     << "Ambient intensity: " << this->ambient << '\n';
+	os << "  width: " << this->width << '\n'
+	   << "  height: " << this->height << '\n'
+	   << "  columns: " << this->cols << '\n'
+	   << "  rows: " << (int)(this->cols * this->height / this->width) << '\n'
+	   << "  viewpoint: " << this->viewPoint << '\n'
+	   << "  ambient: " << this->ambient << '\n';
 }

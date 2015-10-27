@@ -1,10 +1,10 @@
 window
   name view ;
   viewpoint   0 0 4
-  windowwidth  8
-  windowheight 6
+  width  8
+  height 6
   columns  500
-  ambient     4 4 4 ;
+  ambient  4 4 4 ;
 
 pointlight 
    name leftspot ;

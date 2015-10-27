@@ -23,8 +23,8 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	void load(std::istream&);
-	void dump(std::ostream&) const;
+	virtual void load(std::istream&);
+	virtual void dump(std::ostream&) const;
 };
 
 #endif

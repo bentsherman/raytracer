@@ -32,6 +32,8 @@ public:
 	void set_y(double);
 	void set_z(double);
 
+	bool operator==(const Vector& rhs) const;
+	bool operator!=(const Vector& rhs) const;
 	Vector operator+(const Vector& rhs) const;
 	Vector operator-(const Vector& rhs) const;
 	Vector operator*(const double& c) const;
@@ -40,6 +42,7 @@ public:
 	Vector unit() const;
 	double dot(const Vector& rhs) const;
 	Vector cross(const Vector& rhs) const;
+	Vector reflect(const Vector&) const;
 };
 
 std::ostream& operator<<(std::ostream&, const Vector&);

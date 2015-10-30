@@ -116,10 +116,20 @@ void Vector::set_z(double z)
 }
 
 /**
+ * Check whether two vectors are equal.
+ */
+bool Vector::operator==(const Vector& rhs) const
+{
+	return this->x == rhs.x && this->y == rhs.y && this->z == rhs.z;
+}
+
+bool Vector::operator!=(const Vector& rhs) const
+{
+	return !(*this == rhs);
+}
+
+/**
  * Get the sum of two vectors.
- *
- * @param rhs  vector to add to this vector
- * @return     sum of this vector and rhs
  */
 Vector Vector::operator+(const Vector& rhs) const
 {
@@ -128,9 +138,6 @@ Vector Vector::operator+(const Vector& rhs) const
 
 /**
  * Get the difference of two vectors.
- *
- * @param rhs  vector to subtract from this vector
- * @return     difference of this vector and rhs
  */
 Vector Vector::operator-(const Vector& rhs) const
 {
@@ -139,9 +146,6 @@ Vector Vector::operator-(const Vector& rhs) const
 
 /**
  * Get the product of this vector and a scalar.
- *
- * @param c  scalar
- * @return   product of this vector and c
  */
 Vector Vector::operator*(const double& c) const
 {
@@ -150,9 +154,6 @@ Vector Vector::operator*(const double& c) const
 
 /**
  * Get the quotient of this vector and a scalar.
- *
- * @param c  scalar
- * @return   quotient of this vector and c
  */
 Vector Vector::operator/(const double& c) const
 {
@@ -193,6 +194,19 @@ Vector Vector::cross(const Vector& rhs) const
 		this->z * rhs.x - this->x * rhs.z,
 		this->x * rhs.y - this->y * rhs.x
 	);
+}
+
+/**
+ * Get the reflection of this vector against a normal vector.
+ *
+ * @param N  unit vector
+ * @return reflection of this vector against N
+ */
+Vector Vector::reflect(const Vector& N) const
+{
+	Vector U = this->unit() * -1;
+
+	return N * 2 * U.dot(N) - U;
 }
 
 /**

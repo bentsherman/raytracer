@@ -40,7 +40,7 @@ color_t PointLight::get_color() const
 /**
  * Get the brightness of a point light.
  */
-double PointLight::get_brightess() const
+double PointLight::get_brightness() const
 {
 	return this->brightness;
 }

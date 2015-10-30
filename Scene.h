@@ -25,8 +25,12 @@ private:
 	std::list<PointLight> lights;
 
 	Vector gen_ray(int, int) const;
-	Vector trace_ray(const Vector&, const Vector&, double);
-	SceneObject* closest(const Vector&, const Vector&, hitinfo_t*);
+	Vector trace_ray(const Vector&, const Vector&, double, const SceneObject*);
+	SceneObject* closest(const Vector&, const Vector&, const SceneObject*, hitinfo_t*);
+
+	Vector process_light(const PointLight&, const SceneObject*, const hitinfo_t&);
+	Vector lighting(const SceneObject*, const hitinfo_t&);
+
 	color_t render_pixel(int, int);
 
 public:

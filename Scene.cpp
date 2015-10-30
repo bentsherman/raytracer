@@ -51,57 +51,135 @@ Vector Scene::gen_ray(int row, int col) const
  * @param V     origin of the ray
  * @param D     direction of the ray
  * @param dist  total distance traveled by the ray
+ * @param self  pointer to scene object, if ray originated from object
  * @param composite intensity of the light encountered by the ray
  */
-Vector Scene::trace_ray(const Vector& V, const Vector& D, double dist)
+Vector Scene::trace_ray(const Vector& V, const Vector& D, double dist, const SceneObject* self)
 {
 	hitinfo_t hit;
-	SceneObject* object = this->closest(V, D, &hit);
+	SceneObject* object = this->closest(V, D, self, &hit);
 
-	if ( object ) {
-		dist += hit.distance;
-
-		/* compute color from object color and ambient intensity */
-		Vector intensity(
-			object->get_color().r * this->window.get_ambient().get_x(),
-			object->get_color().g * this->window.get_ambient().get_y(),
-			object->get_color().b * this->window.get_ambient().get_z()
-		);
-
-		/* scale intensity to color and darken by distance from viewpoint */
-		return intensity / (255 * dist);
+	if ( !object ) {
+		return Vector();
 	}
 
-	return Vector();
+	dist += hit.distance;
+
+	/* compute color from object color and ambient intensity */
+	Vector intensity(
+		object->get_color().r * this->window.get_ambient().get_x(),
+		object->get_color().g * this->window.get_ambient().get_y(),
+		object->get_color().b * this->window.get_ambient().get_z()
+	);
+
+	/* add diffuse lighting, convert to color, and darken by total distance */
+	intensity = (intensity + this->lighting(object, hit)) / (255 * dist);
+
+	Vector R = object->get_reflective();
+
+	if ( R != Vector() ) {
+		Vector D2 = D.reflect(hit.normal);
+		Vector I2 = this->trace_ray(hit.normal, D2, dist, object);
+
+		intensity = intensity + Vector(
+			R.get_x() * I2.get_x(),
+			R.get_y() * I2.get_y(),
+			R.get_z() * I2.get_z()
+		);
+	}
+
+	// TODO: work out differences in output with ray3, specifically with planes
+
+	return intensity;
 }
 
 /**
  * Find the closest scene object hit by a ray.
  *
- * @param V    origin of the ray
- * @param D    direction of the ray
- * @param hit  pointer to hit parameters
+ * @param V     origin of the ray
+ * @param D     direction of the ray
+ * @param self  pointer to scene object, if ray originated from object
+ * @param hit   pointer to hit parameters
  * @return pointer to closest hit scene object, or NULL if nothing was hit
  */
-SceneObject* Scene::closest(const Vector& V, const Vector& D, hitinfo_t* hit)
+SceneObject* Scene::closest(const Vector& V, const Vector& D,
+                            const SceneObject* self, hitinfo_t* hit)
 {
 	SceneObject* closest = 0;
 
 	for ( std::list<SceneObject*>::iterator iter = this->objects.begin();
 			iter != this->objects.end(); iter++ ) {
-
-		/* check each scene object for a hit */
 		hitinfo_t hit_i;
-		bool result = (*iter)->hits(V, D, &hit_i);
 
 		/* update hitinfo if a closer hit is found */
-		if ( result && (!closest || hit_i.distance < hit->distance) ) {
-			*hit = hit_i;
-			closest = *iter;
+		if ( *iter != self && (*iter)->hits(V, D, &hit_i) ) {
+			if ( !closest || hit_i.distance < hit->distance ) {
+				*hit = hit_i;
+				closest = *iter;
+			}
 		}
 	}
 
 	return closest;
+}
+
+/**
+ * Compute the diffuse lighting of a point light on an object.
+ *
+ * @param light   point light
+ * @param object  pointer to scene object
+ * @param hit     parameters of the ray that hit object
+ * @return intensity of the diffuse lighting
+ */
+Vector Scene::process_light(const PointLight& light,
+                            const SceneObject* object,
+                            const hitinfo_t& hit)
+{
+	double cosine = (light.get_center() - hit.point).unit().dot(hit.normal);
+
+	/* check for self-occlusion */
+	if ( cosine <= 0 ) {
+		return Vector();
+	}
+
+	/* check for occlusion by another object */
+	hitinfo_t hit2;
+	SceneObject* object2 = this->closest(light.get_center(),
+			(hit.point - light.get_center()).unit(), 0, &hit2);
+
+	if ( object2 != object ) {
+		return Vector();
+	}
+
+	/* compute the diffuse lighting */
+	Vector diffuse = object->get_diffuse();
+
+	double k = light.get_brightness() * cosine / (hit.point - light.get_center()).length();
+
+	return Vector(
+		diffuse.get_x() * light.get_color().r * k,
+		diffuse.get_y() * light.get_color().g * k,
+		diffuse.get_z() * light.get_color().b * k
+	);
+}
+
+/**
+ * Compute the total diffuse lighting on an object in the scene.
+ *
+ * @param object  pointer to a scene object
+ * @param hit     paramters of the ray that hit object
+ * @return intensity of the total diffuse lighting on object
+ */
+Vector Scene::lighting(const SceneObject* object, const hitinfo_t& hit)
+{
+	Vector intensity;
+
+	for ( std::list<PointLight>::iterator iter = this->lights.begin();
+			iter != this->lights.end(); iter++ ) {
+		intensity = intensity + this->process_light(*iter, object, hit);
+	}
+
+	return intensity;
 }
 
 /**
@@ -115,7 +193,7 @@ color_t Scene::render_pixel(int row, int col)
 {
 	Vector V = this->window.get_viewpoint();
 	Vector D = this->gen_ray(row, col);
-	Vector intensity = this->trace_ray(V, D, 0);
+	Vector intensity = this->trace_ray(V, D, 0, 0);
 
 	/* clamp the color intensity to 1 */
 	if ( intensity.get_x() > 1.0 ) intensity.set_x(1.0);

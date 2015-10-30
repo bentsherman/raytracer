@@ -38,6 +38,22 @@ color_t SceneObject::get_color() const
 }
 
 /**
+ * Get the diffuse lighting intensity of the scene object.
+ */
+Vector SceneObject::get_diffuse() const
+{
+	return this->diffuse;
+}
+
+/**
+ * Get the reflective lighting intensity of the scene object.
+ */
+Vector SceneObject::get_reflective() const
+{
+	return this->reflective;
+}
+
+/**
  * Write a scene object to an output stream.
  *
  * @param os

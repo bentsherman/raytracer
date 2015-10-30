@@ -31,6 +31,8 @@ public:
 	virtual ~SceneObject();
 
 	color_t get_color() const;
+	Vector get_diffuse() const;
+	Vector get_reflective() const;
 
 	virtual void load(std::istream&);
 	virtual void dump(std::ostream&) const;

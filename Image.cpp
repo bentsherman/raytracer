@@ -72,26 +72,8 @@ Image::~Image()
 	delete[] this->pixels;
 }
 
-void swap(Image& lhs, Image& rhs)
-{
-	std::swap(lhs.cols, rhs.cols);
-	std::swap(lhs.rows, rhs.rows);
-	std::swap(lhs.brightness, rhs.brightness);
-	std::swap(lhs.pixels, rhs.pixels);
-}
-
 /**
- * Assignment operator implemented with the "copy-and-swap" pattern.
- */
-Image& Image::operator=(Image& rhs)
-{
-	swap(*this, rhs);
-
-	return *this;
-}
-
-/**
- * Get the pixel width of an image.
+ * Get the pixel width of the image.
  */
 int Image::get_cols() const
 {
@@ -99,7 +81,7 @@ int Image::get_cols() const
 }
 
 /**
- * Get the pixel height of an image.
+ * Get the pixel height of the image.
  */
 int Image::get_rows() const
 {
@@ -107,11 +89,33 @@ int Image::get_rows() const
 }
 
 /**
- * Get the brightness of an image.
+ * Get the brightness of the image.
  */
 int Image::get_brightness() const
 {
 	return this->brightness;
+}
+
+/**
+ * Get a row of pixels in the image.
+ *
+ * @param i  index of row
+ * @return pointer to first pixel in row i
+ */
+color_t* Image::operator[](unsigned i)
+{
+	return this->pixels + this->cols * i;
+}
+
+/**
+ * Get a row of pixels in the image.
+ *
+ * @param i  index of row
+ * @return pointer to first pixel in row i
+ */
+const color_t* Image::operator[](unsigned i) const
+{
+	return this->pixels + this->cols * i;
 }
 
 /**

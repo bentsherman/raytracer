@@ -5,6 +5,10 @@
  * @section DESCRIPTION
  *
  * Interface definition of an image.
+ *
+ * For simplicity, it is assumed that Image objects will be managed as a
+ * pointer instead of a value, so the copy constructor and assignment
+ * operator are not defined explicitly.
  */
 #ifndef IMAGE_H
 #define IMAGE_H
@@ -31,16 +35,14 @@ private:
 public:
 	Image(int cols, int rows, int brightness);
 	Image();
-	// Image(const Image& other);
 	~Image();
 
-	friend void swap(Image& lhs, Image& rhs);
-	Image& operator=(Image& rhs);
-
-	// TODO: implement array access, double if possible
 	int get_cols() const;
 	int get_rows() const;
 	int get_brightness() const;
+
+	      color_t* operator[](unsigned i);
+	const color_t* operator[](unsigned i) const;
 
 	void load(const char* fname);
 	void write(const char* fname) const;

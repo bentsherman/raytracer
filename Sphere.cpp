@@ -89,7 +89,7 @@ bool Sphere::hits(const Vector& V, const Vector& D, hitinfo_t* hit) const
 		if ( t > 0 ) {
 			Vector H = V + D * t;
 
-			if ( H.getZ() <= 0 ) {
+			if ( H.get_z() <= 0 ) {
 				hit->point = H;
 				hit->normal = (H - C).unit();
 				hit->distance = t;

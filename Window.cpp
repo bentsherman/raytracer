@@ -19,7 +19,7 @@ Window::Window()
 	this->width = 4;
 	this->height = 4;
 	this->cols = 600;
-	this->viewPoint = Vector(0, 0, 5);
+	this->viewpoint = Vector(0, 0, 5);
 	this->ambient = Vector(1, 1, 1);
 }
 
@@ -48,6 +48,22 @@ int Window::get_cols() const
 }
 
 /**
+ * Get the view point of a window.
+ */
+Vector Window::get_viewpoint() const
+{
+	return this->viewpoint;
+}
+
+/**
+ * Get the ambient intensity of a window.
+ */
+Vector Window::get_ambient() const
+{
+	return this->ambient;
+}
+
+/**
  * Write a window to an output stream.
  *
  * @param os
@@ -60,7 +76,7 @@ std::ostream& operator<<(std::ostream& os, const Window& window)
 	   << "  height: " << window.height << '\n'
 	   << "  columns: " << window.cols << '\n'
 	   << "  rows: " << (int)(window.cols * window.height / window.width) << '\n'
-	   << "  viewpoint: " << window.viewPoint << '\n'
+	   << "  viewpoint: " << window.viewpoint << '\n'
 	   << "  ambient: " << window.ambient << '\n';
 
 	return os;
@@ -89,7 +105,7 @@ std::istream& operator>>(std::istream& is, Window& window)
 			is >> window.cols;
 		}
 		else if ( token == "viewpoint" ) {
-			is >> window.viewPoint;
+			is >> window.viewpoint;
 		}
 		else if ( token == "ambient" ) {
 			is >> window.ambient;

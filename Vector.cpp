@@ -50,7 +50,7 @@ Vector::Vector(const Vector& v)
  *
  * @return x coordinate of the vector
  */
-double Vector::getX() const
+double Vector::get_x() const
 {
 	return this->x;
 }
@@ -60,7 +60,7 @@ double Vector::getX() const
  *
  * @return y coordinate of the vector
  */
-double Vector::getY() const
+double Vector::get_y() const
 {
 	return this->y;
 }
@@ -70,7 +70,7 @@ double Vector::getY() const
  *
  * @return z coordinate of the vector
  */
-double Vector::getZ() const
+double Vector::get_z() const
 {
 	return this->z;
 }
@@ -83,6 +83,36 @@ double Vector::getZ() const
 double Vector::length() const
 {
 	return sqrt(this->dot(*this));
+}
+
+/**
+ * Set the x coordinate of a vector.
+ *
+ * @param x  new x coordinate
+ */
+void Vector::set_x(double x)
+{
+	this->x = x;
+}
+
+/**
+ * Set the y coordinate of a vector.
+ *
+ * @param y  new y coordinate
+ */
+void Vector::set_y(double y)
+{
+	this->y = y;
+}
+
+/**
+ * Set the z coordinate of a vector.
+ *
+ * @param z  new z coordinate
+ */
+void Vector::set_z(double z)
+{
+	this->z = z;
 }
 
 /**
@@ -170,7 +200,7 @@ Vector Vector::cross(const Vector& rhs) const
  */
 std::ostream& operator<<(std::ostream& os, const Vector& v)
 {
-	os << "(" << v.getX() << ", " << v.getY() << ", " << v.getZ() << ")";
+	os << "(" << v.get_x() << ", " << v.get_y() << ", " << v.get_z() << ")";
 	return os;
 }
 

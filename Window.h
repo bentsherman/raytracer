@@ -17,7 +17,7 @@ private:
 	double width;
 	double height;
 	int cols;
-	Vector viewPoint;
+	Vector viewpoint;
 	Vector ambient;
 
 public:
@@ -26,6 +26,8 @@ public:
 	double get_width() const;
 	double get_height() const;
 	int get_cols() const;
+	Vector get_viewpoint() const;
+	Vector get_ambient() const;
 
 	friend std::ostream& operator<<(std::ostream&, const Window&);
 	friend std::istream& operator>>(std::istream&, Window&);

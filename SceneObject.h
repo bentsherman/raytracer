@@ -30,6 +30,8 @@ public:
 	SceneObject();
 	virtual ~SceneObject();
 
+	color_t get_color() const;
+
 	virtual void load(std::istream&);
 	virtual void dump(std::ostream&) const;
 

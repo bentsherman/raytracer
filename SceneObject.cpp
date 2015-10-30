@@ -30,6 +30,14 @@ SceneObject::~SceneObject()
 }
 
 /**
+ * Get the color of the scene object.
+ */
+color_t SceneObject::get_color() const
+{
+	return this->color;
+}
+
+/**
  * Write a scene object to an output stream.
  *
  * @param os

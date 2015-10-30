@@ -20,12 +20,20 @@
 class Scene {
 private:
 	Window window;
-	Image image;  // TODO: consider moving image to Window
+	Image* image;
 	std::list<SceneObject*> objects;
 	std::list<PointLight> lights;
 
+	Vector gen_ray(int, int) const;
+	Vector trace_ray(const Vector&, const Vector&, double);
+	SceneObject* closest(const Vector&, const Vector&, hitinfo_t*);
+	color_t render_pixel(int, int);
+
 public:
 	~Scene();
+
+	void render();
+	Image* get_image() const;
 
 	friend std::ostream& operator<<(std::ostream&, const Scene&);
 	friend std::istream& operator>>(std::istream&, Scene&);

@@ -31,8 +31,5 @@ ${OBJS}: Vector.h       \
 ray: ${OBJS}
 	g++ -o $@ ${OBJS}
 
-test:
-	./ray scene1.txt output.ppm
-
 clean:
 	rm -f *.o ray core

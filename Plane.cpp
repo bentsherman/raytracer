@@ -89,6 +89,10 @@ bool Plane::hits(const Vector& V, const Vector& D, hitinfo_t* hit) const
 				hit->normal = N;
 				hit->distance = t;
 
+				if ( D.dot(hit->normal) > 0 ) {
+					hit->normal = hit->normal * -1;
+				}
+
 				return true;
 			}
 		}

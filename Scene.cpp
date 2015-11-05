@@ -79,7 +79,7 @@ Vector Scene::trace_ray(const Vector& V, const Vector& D, double dist, const Sce
 
 	if ( R != Vector() ) {
 		Vector D2 = D.reflect(hit.normal);
-		Vector I2 = this->trace_ray(hit.normal, D2, dist, object);
+		Vector I2 = this->trace_ray(hit.point, D2, dist, object);
 
 		intensity = intensity + Vector(
 			R.get_x() * I2.get_x(),
@@ -87,8 +87,6 @@ Vector Scene::trace_ray(const Vector& V, const Vector& D, double dist, const Sce
 			R.get_z() * I2.get_z()
 		);
 	}
-
-	// TODO: work out differences in output with ray3, specifically with planes
 
 	return intensity;
 }
@@ -167,7 +165,7 @@ Vector Scene::process_light(const PointLight& light,
  * Compute the total diffuse lighting on an object in the scene.
  *
  * @param object  pointer to a scene object
- * @param hit     paramters of the ray that hit object
+ * @param hit     parameters of the ray that hit object
  * @return intensity of the total diffuse lighting on object
  */
 Vector Scene::lighting(const SceneObject* object, const hitinfo_t& hit)

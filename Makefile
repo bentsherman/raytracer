@@ -1,7 +1,4 @@
-.SUFFIXES:
-.SUFFIXES: .c .cpp .o
-
-CC = g++
+CXX = g++
 CXXFLAGS = -g -Wall
 
 OBJS=Vector.o       \
@@ -17,19 +14,11 @@ OBJS=Vector.o       \
 
 all: ray
 
-${OBJS}: Vector.h       \
-         Image.h        \
-         Entity.h       \
-         Scene.h        \
-         Window.h       \
-         SceneObject.h  \
-         Plane.h        \
-         Sphere.h       \
-         PointLight.h   \
-         Makefile
+%.o: src/%.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 ray: ${OBJS}
-	g++ -o $@ ${OBJS}
+	$(CXX) -o $@ ${OBJS}
 
 clean:
-	rm -f *.o ray core
+	rm -f *.o ray
